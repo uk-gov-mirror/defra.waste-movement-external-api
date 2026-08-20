@@ -1,4 +1,5 @@
 import { health } from '../routes/health.js'
+import { createMovement } from '../routes/create-movement.js'
 import { createReceiptMovement } from '../routes/create-receipt-movement.js'
 import { updateReceiptMovement } from '../routes/update-receipt-movement.js'
 import { getEwcCodes } from '../routes/reference-data/get-ewc-codes.js'
@@ -14,6 +15,7 @@ const router = {
       // Register all routes
       const routes = [
         health,
+        createMovement,
         createReceiptMovement,
         updateReceiptMovement,
         getEwcCodes,
