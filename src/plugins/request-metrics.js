@@ -20,6 +20,35 @@ export const requestMetrics = {
         }
         return h.continue
       })
+
+      server.ext(
+        'onPostAuth',
+        (request, h) => {
+          if (!isReceiptMovementEndpoint(request)) {
+            return h.continue
+          }
+          const clientId = request.auth?.credentials?.clientId
+          const organisationId =
+            request.submittingOrganisation?.defraCustomerOrganisationId
+          // CDP's log pipeline only indexes its allowlisted ECS fields
+          // (cdp-documentation how-to/logging.md), so the client id rides in
+          // tenant.id and the organisation id in event.reference. The
+          // pipeline drops flattened keys where nested are expected, so these
+          // must stay nested objects.
+          request.logger.info(
+            {
+              tenant: clientId ? { id: clientId } : undefined,
+              event: {
+                reference: organisationId,
+                action: 'receipt-movement-attempted'
+              }
+            },
+            'Receipt movement attempted'
+          )
+          return h.continue
+        },
+        { after: 'addSubmittingOrganisationToRequest' }
+      )
     }
   }
 }
