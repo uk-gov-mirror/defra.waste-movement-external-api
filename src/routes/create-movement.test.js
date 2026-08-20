@@ -2,7 +2,7 @@ import { jest } from '@jest/globals'
 import { httpClients } from '../common/helpers/http-client.js'
 import { createMovement } from './create-movement.js'
 import { createMovementRequest } from '../test/utils/createMovementRequest.js'
-import { HTTP_STATUS } from 'waste-movement-utils'
+import { HTTP_STATUS } from '@defra/waste-movement-utils'
 
 jest.mock('../common/helpers/http-client.js', () => ({
   httpClients: {

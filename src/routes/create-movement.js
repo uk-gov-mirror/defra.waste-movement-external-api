@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { HTTP_STATUS } from 'waste-movement-utils'
+import { HTTP_STATUS } from '@defra/waste-movement-utils'
 import { handleCreateMovement } from '../handlers/create-movement.js'
 import { badRequestResponseSchema } from '../schemas/bad-request-response-schema.js'
 import { createMovementRequest } from '../schemas/generated-openapi-0-2-5-alpha.js'
